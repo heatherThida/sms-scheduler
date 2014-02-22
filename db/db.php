@@ -4,8 +4,6 @@ include_once('../includes/config.php');
 
 $db = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
 
-$conn = mysqli_connect(DBHOST, DBUSER, DBPASS, DBNAME);
-
 // Check connection
 if ($db->connect_errno) {
     echo "Failed to connect to MySQL: (" . $db->connect_errno . ") ";
@@ -14,9 +12,8 @@ if ($db->connect_errno) {
 
 $drop_tables = "DROP TABLE log";
 
-
 // Should use "CREATE TABLE IF NOT EXISTS log
-$log = "CREATE TABLE log
+$log = "CREATE TABLE IF NOT EXISTS log
         (
          id INT NOT NULL AUTO_INCREMENT,
          status varchar(25),
