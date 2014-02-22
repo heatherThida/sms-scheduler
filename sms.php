@@ -12,7 +12,6 @@ $date = $_POST["date"];
 $hour = $_POST["hour"];
 $minute = $_POST["minute"];
 
-
 // Set time
 $parsedDate = date_parse($date);
 $year = $parsedDate['year'];
@@ -20,9 +19,8 @@ $month = $parsedDate['month'];
 $day = $parsedDate['day'];
 
 $scheduled_time = new DateTime($date . "$hour:$minute");
+// Save time as string instead of object
 $scheduled_time = $scheduled_time->format('d/m/Y H:i:s');
-
-debug($scheduled_time);
 
 // Array to store data
 $sms_data = array(
@@ -45,13 +43,7 @@ $db = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
 if ($db->connect_errno) {
     echo "Failed to connect to MySQL: (" . $db->connect_errno . ") ";
     exit;
-} else {
-    echo "Successfully connected to db";
 }
-
-// Clean up stuff that needs cleaning
-$message = $db->real_escape_string($message);
-debug($message);
 
 $sql = "INSERT INTO log
         (status, from_number, to_number, message, sms_scheduled_time,
@@ -66,15 +58,11 @@ if ($insertData) {
     echo "Data has been successfully inserted.\n";
 } else {
     echo "Oops, could not insert data.<br />\n";
-    //echo $db->connect_errno;
     echo $db->error;
-    //var_dump($db->error_list);
 }
 
 // Close MySQL connection
 $db->close();
-
-debug($sms_data);
 
 ?>
 
@@ -96,17 +84,17 @@ debug($sms_data);
 		echo "Date: $date <br />";
 		?>
 
-<!--        --><?php
-//
-//        $client = new Services_Twilio(SID, TOKEN);
-//
-//         $message = $client->account->messages->sendMessage(
-//                            TWILIO_NUMBER,
-//                            $to,
-//                            $message
-//                     );
-//
-//        ?>
+        <?php
+
+        $client = new Services_Twilio(SID, TOKEN);
+
+         $message = $client->account->messages->sendMessage(
+                            TWILIO_NUMBER,
+                            $to,
+                            $message
+                     );
+
+        ?>
 		
 		<?php include 'footer.php'; ?>
 	</body>
