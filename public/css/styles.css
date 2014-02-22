@@ -1,0 +1,41 @@
+body {
+	padding-top: 40px;
+	padding-bottom: 40px;
+	background-color: #2ecc71; 
+}
+
+.form-schedule-sms {
+	background-color: #ECF0F1;
+	max-width: 330px;
+	padding: 15px;
+	margin: 0 auto; 
+	border-radius: 5px 5px 5px 5px;
+}
+
+.form-schedule-sms .form-schedule-sms-heading,
+.form-schedule-sms .checkbox {
+	margin-bottom: 10px;
+}
+
+.form-schedule-sms .form-control {
+	position: relative;
+	height: auto;
+	-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+			box-sizing: border-box;
+	padding: 10px;
+	font-size: 16px;
+}
+
+.form-schedule-sms .form-control:focus {
+	z-index: 2;
+}
+
+#date {
+	background-color: white;
+}
+
+.ui-datepicker-calendar {
+	background-color: white;
+;
+}
