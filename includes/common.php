@@ -12,13 +12,3 @@ function debug($object){
     echo "</pre>";
 }
 
-//function insertArrayIntoMySQL($table, array $cols, array $values) {
-//
-//    $db = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
-//
-//    foreach($values as $col => $value) {
-//
-//    }
-//
-//}
-

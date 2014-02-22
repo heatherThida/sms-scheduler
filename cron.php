@@ -14,8 +14,6 @@ $mysqli = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
 if (mysqli_connect_errno()) {
     printf("Connection to MySQL failed: %s\n", mysqli_connect_error());
     exit;
-} else {
-    echo "Connected to database.\n";
 }
 
 
