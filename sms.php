@@ -20,7 +20,9 @@ $day = $parsedDate['day'];
 
 $scheduled_time = new DateTime($date . "$hour:$minute");
 // Save time as string instead of object
-$scheduled_time = $scheduled_time->format('d/m/Y H:i:s');
+$scheduled_time = $scheduled_time->format('m/d/Y H:i:s');
+
+debug($scheduled_time);
 
 // Array to store data
 $sms_data = array(
@@ -84,17 +86,17 @@ $db->close();
 		echo "Date: $date <br />";
 		?>
 
-        <?php
-
-        $client = new Services_Twilio(SID, TOKEN);
-
-         $message = $client->account->messages->sendMessage(
-                            TWILIO_NUMBER,
-                            $to,
-                            $message
-                     );
-
-        ?>
+<!--        --><?php
+//
+//        $client = new Services_Twilio(SID, TOKEN);
+//
+//         $message = $client->account->messages->sendMessage(
+//                            TWILIO_NUMBER,
+//                            $to,
+//                            $message
+//                     );
+//
+//        ?>
 		
 		<?php include 'footer.php'; ?>
 	</body>

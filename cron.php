@@ -17,7 +17,7 @@ if (mysqli_connect_errno()) {
 }
 
 // Loop through database and queue all rows with pending status and scheduled
-// time - now < 1 minute.  
+// time - now < 1 minute.
 
 // Close Connection
 $mysqli->close();
