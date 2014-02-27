@@ -4,6 +4,46 @@ include_once('./lib/twilio-php/Services/Twilio.php');
 include_once('./includes/config.php');
 include_once('./includes/common.php');
 
+$errors         = array();      // Array to hold validation errors
+$data           = array();      // Array to pass back data
+
+
+if (empty($_POST["to"])){
+    $errors['to'] = 'Please enter a number to send to';
+}
+
+if (empty($_POST["from"])) {
+    $errors['from'] = 'Please enter your cell phone number';
+}
+
+if (empty($_POST["message"])) {
+    $errors['message'] = 'Sorry, an empty sms cannot be sent.';
+}
+
+if (empty($_POST["date"])) {
+    $errors['date'] = 'Date is required.';
+}
+
+if (empty($_POST["hour"])) {
+    $errors['hour'] = 'Hour is required.';
+}
+
+if (empty($_POST["minute"])) {
+    $errors['minute'] = 'Minute is required.';
+}
+
+if ( !empty($errors)) {
+    // Return errors
+    $data['success'] = false;
+    $data['errors'] = $errors;
+} else {
+    $data['success'] = true;
+    $data['message'] = 'Success';
+}
+
+// return data
+echo json_encode($data);
+
 $to = $_POST["to"];
 $from = $_POST["from"];
 $ip = $_POST["ip"];
