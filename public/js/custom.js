@@ -1,7 +1,21 @@
 /**
- * Created on 2/26/14.
+ *
  */
 $(document).ready(function() {
+
+    // jQuery UI Datepicker
+    $(function() {
+        $("#date").datepicker({
+            //options go here
+            showOtherMonths: true,
+            selectOtherMonths: true,
+            minDate: 0,
+            maxDate: "+3M"
+        });
+        $("#anim").change(function() {
+            $("#date").datepicker("option", "showAnim", $(this).val() )
+        })
+    });
 
     // process form data
     $('form').submit(function(event) {
@@ -34,7 +48,7 @@ $(document).ready(function() {
             });
 
         // stop form from submitting the normal way and refresh page
-        event.preventDefault();
+        //event.preventDefault();
     });
 
 });
