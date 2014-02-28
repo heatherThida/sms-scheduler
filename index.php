@@ -15,20 +15,6 @@
 	<head>
 		<title>SMS Scheduler</title>
 		<?php include 'head.php'; ?>
-		<script>
-			$(function() {
-				$("#date").datepicker({
-                    //options go here
-                    showOtherMonths: true,
-                    selectOtherMonths: true,
-                    minDate: 0,
-                    maxDate: "+3M"
-                });
-				$("#anim").change(function() {
-					$("#date").datepicker("option", "showAnim", $(this).val() )
-					})
-				})
-		</script
 	</head>
 	<body>
 		<div class="container">
