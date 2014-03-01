@@ -119,7 +119,7 @@ $smsData = $_POST;
 $db = new Database();
 $data = $db->savePostData('log', $smsData);
 
-print_r($data);
+debug($smsData);
 
 ?>
 

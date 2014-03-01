@@ -29,32 +29,33 @@
                         <!-- SMS TO -->
                         <div id=""to-group" class="form-group">
                             <label for="to">To</label>
-                            <input type="text" class="form-control" name="to" id="to" placeholder="(212) 000-0000">
+                            <input type="text" class="form-control" name="to" id="to" placeholder="212-000-0000" autofocus />
                         </div>
                         <!-- SMS From -->
                         <div id="from-group" class="form-group">
                             <label for="from">From</label>
-                            <input type="text" class="form-control" name="from" id="from" placeholder="(212) 000-1111">
+                            <input type="text" class="form-control" name="from" id="from" placeholder="212-000-1111" />
                         </div>
                         <!-- SMS Message -->
                         <div id="message-group" class="form-group">
                             <label for="message">Message</label>
-                            <textarea maxlength="140" name="message" id="message" required></textarea>
+                            <br />
+                            <textarea class="form-control" maxlength="140" name="message" id="message" placeholder="Type your text message here..." required></textarea>
                         </div>
 
                         <!-- Date to schedule SMS -->
                         <div id="message-group" class="form-group">
                             <label for="message">Date</label>
-                            <input type="text" id="date" name="date">
+                            <input type="text" class="form-control"  id="date" name="date" />
                         </div>
 
 
-                        Hour: <select id="hour" name="hour">
-                                <?php selectOptions(0, 24); ?>
-                        </select>
-                        Minute: <select id="minute" name="minute">
-                            <?php selectOptions(0, 60); ?>
-                        </select>
+<!--                        Hour: <select id="hour" name="hour">-->
+<!--                                --><?php //selectOptions(0, 24); ?>
+<!--                        </select>-->
+<!--                        Minute: <select id="minute" name="minute">-->
+<!--                            --><?php //selectOptions(0, 60); ?>
+<!--                        </select>-->
                         <input type="hidden" name="ip" value="<?php echo $ip ?>" />
                         <button class="btn btn-lg btn-success btn-block" type="submit">Submit</button>
                     </fieldset>

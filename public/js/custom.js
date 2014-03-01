@@ -77,7 +77,7 @@ $(document).ready(function() {
             });
 
         // stop form from submitting the normal way and refresh page
-        event.preventDefault();
+        //event.preventDefault();
     });
 
 });
