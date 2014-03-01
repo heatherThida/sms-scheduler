@@ -5,10 +5,13 @@
 <meta name="author" content="Kojoman">
 
 <!-- Bootstrap CSS --> 
-<link href="public/css/bootstrap.css" rel="stylesheet">
+<link rel="stylesheet" href="public/css/bootstrap.css" >
 <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
 
+<!-- jQuery Simple DateTimePicker CSS -->
+<link rel="stylesheet" href="public/css/jquery.simple-dtpicker.css">
+
 <!-- Custom styles -->
-<link href="public/css/styles.css" rel="stylesheet">
+<link rel="stylesheet" href="public/css/styles.css">
 
 
