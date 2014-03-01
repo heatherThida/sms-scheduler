@@ -30,12 +30,3 @@ body {
 .form-schedule-sms .form-control:focus {
 	z-index: 2;
 }
-
-#date {
-	background-color: white;
-}
-
-.ui-datepicker-calendar {
-	background-color: white;
-;
-}
