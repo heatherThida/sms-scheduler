@@ -187,14 +187,6 @@ class Database
             $errors['date'] = 'Date is required.';
         }
 
-        if (empty($data["hour"])) {
-            $errors['hour'] = 'Hour is required.';
-        }
-
-        if (empty($data["minute"])) {
-            $errors['minute'] = 'Minute is required.';
-        }
-
         if ( !empty($errors)) {
             // Return errors
             $data['success'] = false;
@@ -238,8 +230,6 @@ class Database
             'sms_scheduled_day',
             'sms_scheduled_month',
             'sms_scheduled_year',
-            'sms_scheduled_hour',
-            'sms_scheduled_minute',
             'ip'
         );
 
@@ -257,8 +247,6 @@ class Database
             'sms_scheduled_day' => " ",
             'sms_scheduled_month' => '',
             'sms_scheduled_year' => '',
-            'sms_scheduled_hour' => $data['hour'],
-            'sms_scheduled_minute' => $data['minute'],
             'ip' => $data['ip']
         );
 
@@ -291,59 +279,4 @@ class Database
 
         $this->_mysqli->close();
     }
-
-//    public function getInstance()
-//    {
-//        return self::$_instance;
-//    }
-//
-//    /*
-//     * @param string $query
-//     * @param int    $numRows
-//     *
-//     * @return array - the returned rows from the query.
-//     */
-//    public function query($query, $numRows = NULL)
-//    {
-//        $this->_query = filter_var($query, FILTER_SANITIZE_STRING);     // filters a variable with a specified filter
-//        $statement = $this->_buildQuery($numRows);
-//        $statement->execute();
-//        $this->reset();
-//
-//        return $this->_dynamicBindResults($statement);
-//    }
-
-    /*
-     * A convenient SELECT * function
-     *
-     * @param string $tableName
-     * @param integer $numRows
-     *
-     * @return array - the returned rows from select query
-     */
-//    public function get($tableName, $numRows = null, $columns = '*')
-//    {
-//        if (empty ($columns)) {
-//            $columns = '*';
-//        }
-//
-//        $columns = is_array($columns) ? implode(', ', $columns) : $columns;
-//        $this->_query = "SELECT $column FROM $tableName";
-//        $statement = $this->_buildQuery($numRows);
-//        $statement->execute();
-//        $this->reset();
-//
-//        return this->_dynamicBindResults($stmt);
-//    }
-//
-//    public function getSmsById($id) {
-//
-//
-//    }
-
-//    public function __destruct()
-//    {
-//        // Close MySQL connection
-//        $this->_mysqli->close();
-//    }
 }
