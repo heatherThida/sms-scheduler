@@ -50,8 +50,6 @@ $(document).ready(function() {
             'from'          : $('input[name=from]').val(),
             'message'       : $('textarea[name=message]').val(),
             'date'          : $('input[name=date]').val(),
-            'hour'          : $('select[name=hour]').val(),
-            'minute'        : $('select[name=minute]').val(),
             'ip'            : $('input[name=ip]').val()
         };
 
@@ -67,13 +65,7 @@ $(document).ready(function() {
             .done(function(data) {
                 // log data to console - just for test purposes
                 console.log("Dumping data");
-                console.log(data);
-
-                // handle errors and validation
-                if (! data.success) {
-                    //handle errors for to
-                    $('#to-group').addClass('has-error');
-                }
+                console.log(formData);
             });
 
         // stop form from submitting the normal way and refresh page
