@@ -20,15 +20,10 @@ $log = "CREATE TABLE IF NOT EXISTS log
          from_number VARCHAR(255),
          to_number VARCHAR(255),
          message TEXT,
-         sms_scheduled_day INT(2),
-         sms_scheduled_month INT(2),
-         sms_scheduled_year INT(4),
-         sms_scheduled_hour INT(2),
-         sms_scheduled_minute INT(2),
-         sms_scheduled_second INT(2),
          ip BIGINT(20),
-         twilio_response TEXT,
+         api_response TEXT,
          created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+         scheduled_datetime DATETIME,
          sms_scheduled_time DATETIME,
          scheduled_at TIMESTAMP,
          executed_at TIMESTAMP,
@@ -55,3 +50,30 @@ if ($create_tbl) {
 }
 
 $db->close();
+
+
+// Should use "CREATE TABLE IF NOT EXISTS log
+$log = "CREATE TABLE IF NOT EXISTS log
+        (
+         id INT NOT NULL AUTO_INCREMENT,
+         status varchar(25),
+         from_number VARCHAR(255),
+         to_number VARCHAR(255),
+         message TEXT,
+//         sms_scheduled_day INT(2),
+//         sms_scheduled_month INT(2),
+//         sms_scheduled_year INT(4),
+//         sms_scheduled_hour INT(2),
+//         sms_scheduled_minute INT(2),
+//         sms_scheduled_second INT(2),
+         ip BIGINT(20),
+         api_response TEXT,
+         created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+         scheduled_datetime DATETIME,
+         sms_scheduled_time DATETIME,
+         scheduled_at TIMESTAMP,
+         executed_at TIMESTAMP,
+         finished_at TIMESTAMP,
+         PRIMARY KEY (id)
+        ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+        ";
