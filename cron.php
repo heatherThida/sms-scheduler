@@ -1,6 +1,13 @@
 <?php
 
+include_once('./includes/common.php');
 include_once('./includes/config.php');
+include_once('./Sms/Db.php');
+//include_once('./Sms/Scheduler.php');
+include_once('./Sms/Sms.php');
+include_once('./lib/twilio-php/Services/Twilio.php');
+
+
 /*
  1. Run through database and look for scheduled time
  2. If scheduled time is less than a minute away, note the ID,
@@ -8,18 +15,13 @@ include_once('./includes/config.php');
  4. Mass send out the messages via twilio
 */
 
-$mysqli = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
+$db = new Database();
+$sms = new Sms();
 
-// Check connection
-if (mysqli_connect_errno()) {
-    printf("Connection to MySQL failed: %s\n", mysqli_connect_error());
-    exit;
-}
+$findSmsToSend = $db->getSmsScheduledForNextFiveMinutes();
 
-// Loop through database and queue all rows with pending status and scheduled
-// time - now < 1 minute.
+$x = $sms->send($findSmsToSend);
 
-// Close Connection
-$mysqli->close();
+var_dump($x);
 
 ?>
