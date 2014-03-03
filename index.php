@@ -44,18 +44,12 @@
                         </div>
 
                         <!-- Date to schedule SMS -->
+                        <?php //TODO: Standardize the date or clarify which time zone is being used ?>
                         <div id="message-group" class="form-group">
                             <label for="message">Date</label>
                             <input type="text" class="form-control"  id="date" name="date" />
                         </div>
 
-
-<!--                        Hour: <select id="hour" name="hour">-->
-<!--                                --><?php //selectOptions(0, 24); ?>
-<!--                        </select>-->
-<!--                        Minute: <select id="minute" name="minute">-->
-<!--                            --><?php //selectOptions(0, 60); ?>
-<!--                        </select>-->
                         <input type="hidden" name="ip" value="<?php echo $ip ?>" />
                         <button class="btn btn-lg btn-success btn-block" type="submit">Submit</button>
                     </fieldset>
