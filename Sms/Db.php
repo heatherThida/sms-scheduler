@@ -82,43 +82,36 @@ class Database
     public function savePostData($tableName, $data)
     {
 
-        //$to, $from, $message, $date, $hour, $minute, $ip;
-
         $validatedData = $this->validatePostData($data);
 
         if (($validatedData['success']) == FALSE) {
             //print_r($validatedData['errors']);
-            //return $validatedData['errors'];
-        } else {
-            echo "Data validated..\n";
+            return $validatedData['errors'];
         }
 
+        debug($validatedData);
 
-        //$keys = "`" . implode("`, `", $this->getTableColumnNamesAsArray()) . "`";
         $keys = "`" . implode("`, `", array_keys($this->prepareDataForDatabase($validatedData))) . "`";
         unset($validatedData['errors']);
         $values = "'" . implode("', '", $this->prepareDataForDatabase($validatedData)) . "'";
 
+        echo "keys below:\n";
+        debug($keys);
+        echo "matching values below: \n";
+        debug($values);
+
         $query = "INSERT INTO `{$tableName}` ({$keys}) VALUES ({$values})";
 
-       print_r($keys);
-        echo "\n";
-        print_r($values);
+        debug($query);
 
-        print_r($this->getTableColumnNamesAsArray());
+        $savePostData = $this->_mysqli->query($query);
 
-        @print_r($this->prepareDataForDatabase($validatedData));
-
-        print_r($query);
-
-        $x = $this->_mysqli->query($query);
-
-        print_r($x);
+        return $savePostData;
 
     }
 
     /*
-     * Validate $data data sent via form
+     * Re-validate $data data sent via form just to be safe
      *
      * @param array $data
      */
@@ -150,16 +143,7 @@ class Database
             $data['errors'] = $errors;
         } else {
             $data['success'] = true;
-            $data['message'] = 'Success';
         }
-
-        //$data['errors'] = $errors;
-
-        // convert errs to json
-       // $errors = json_encode($errors);
-
-        // convert data to json
-        //$data = json_encode($data);
 
         // create an array to return
         $validatedData = array(
@@ -195,9 +179,7 @@ class Database
             'to_number' => $data['to'],
             'message' => $data['message'],
             'sms_scheduled_time' => time(),
-            'sms_scheduled_day' => " ",
-            'sms_scheduled_month' => '',
-            'sms_scheduled_year' => '',
+            'scheduled_datetime' => $data['date'],
             'ip' => $data['ip']
         );
 
@@ -205,9 +187,9 @@ class Database
     }
 
 
-    public function getRows($tableName)
+    public function getAllRows($tableName)
     {
-        $query = "SELECT * FROM $tableName WHERE status = 'sent'";
+        $query = "SELECT * FROM $tableName";
         $result = $this->_mysqli->query($query);
 
         if($result) {
@@ -230,4 +212,54 @@ class Database
 
         $this->_mysqli->close();
     }
+
+    public function getSmsScheduledForNextFiveMinutes($tableName = 'log') {
+
+        /*
+         * Each row has a scheduled time
+         * Get current time + 5 minutes = time
+         * Return all rows with scheduled time < time
+         */
+        $timeInterval = time() + 5;
+
+        $dateTime = new DateTime();
+        $dateTime->format('Y-m-d H:i:s');
+        $nextFiveMinutes = $dateTime->add(new DateInterval('PT5M'))->getTimestamp();
+
+        echo $nextFiveMinutes;
+
+        //print_r($nextFiveMinutes->getTimestamp());
+
+
+        $smsToSend = array();
+
+        //$query = "SELECT * FROM $tableName WHERE `scheduled_datetime` < $nextFiveMinutes->getTimestamp() ";
+        //$query = "SELECT * FROM $tableName WHERE `scheduled_datetime`> $nextFiveMinutes";
+        //$query = "SELECT `scheduled_datetime` FROM $tableName";
+        $query = "SELECT * FROM $tableName WHERE TIMESTAMPDIFF(MINUTE, NOW(), `scheduled_datetime`) < 5";
+
+        //print_r($query);
+
+        $result = $this->_mysqli->query($query);
+
+        //print_r($result);
+
+        if($result) {
+            // fetch object array
+            while ($row = $result->fetch_array(MYSQL_ASSOC)) {
+                //print_r($row);
+                $smsToSend[] = $row;
+            }
+            $result->close();
+        }
+
+        $this->_mysqli->close();
+
+        //print_r($smsToSend);
+
+        return $smsToSend;
+
+    }
+
+
 }
