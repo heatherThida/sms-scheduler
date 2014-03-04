@@ -50,13 +50,13 @@ class Sms
         foreach($sms as $key => $singleSms) {
             print_r($singleSms['to_number']);
 
-            $message = $this->client->account->messages->sendMessage(
+            $twilioResponse = $this->client->account->messages->sendMessage(
                 $this->fromNumber,      // From a valid Twilio Number
                 $singleSms['to_number'],    // Text this number
                 $singleSms['message']
             );
 
-            print_r($message);
+            print_r($twilioResponse);
 
             sleep(1);
         }
