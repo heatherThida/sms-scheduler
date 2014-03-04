@@ -6,5 +6,5 @@ $x = new Database(DBHOST, DBUSER, DBPASS, DBNAME);
 
 //print_r($x);
 
-$y = $x->savePostData('log', array('to' => 'me'));
+$y = $x->getSmsScheduledForNextFiveMinutes('log');
 print_r($y);
