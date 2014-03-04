@@ -261,5 +261,15 @@ class Database
 
     }
 
+    public function saveTwilioResponse($data) {
+        // parse and save meaningful response from twilio's api
+
+        $query = "";
+
+        $result = $this->_mysqli->query($query);
+
+        
+    }
+
 
 }
