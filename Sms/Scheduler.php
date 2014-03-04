@@ -31,7 +31,7 @@ class SmsScheduler {
         //$query = "SELECT * FROM $tableName WHERE `scheduled_datetime` < $nextFiveMinutes->getTimestamp() ";
         //$query = "SELECT * FROM $tableName WHERE `scheduled_datetime`> $nextFiveMinutes";
         //$query = "SELECT `scheduled_datetime` FROM $tableName";
-        $query = "SELECT * FROM $tableName WHERE TIMESTAMPDIFF(MINUTE, NOW(), `scheduled_datetime`) < 5";
+        $query = "SELECT * FROM $tableName WHERE TIMESTAMPDIFF(MINUTE, NOW(), `scheduled_datetime`) > 5";
 
         //print_r($query);
 
