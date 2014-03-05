@@ -20,8 +20,9 @@ $sms = new Sms();
 
 $findSmsToSend = $db->getSmsScheduledForNextFiveMinutes();
 
-$x = $sms->send($findSmsToSend);
+$sentSms = $sms->send($findSmsToSend);
 
-var_dump($x);
+//debug($sentSms);
+//debug($sentSms);
 
 ?>
