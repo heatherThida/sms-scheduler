@@ -45,6 +45,7 @@ class Sms
     public function send($sms) {
         echo "Inside send function..\n";
         //print_r($sms);
+        $db = new Database();
 
         echo "Beginning foreach loop..\n";
         foreach($sms as $key => $singleSms) {
@@ -57,12 +58,17 @@ class Sms
                     $singleSms['message']
                 );
             } catch (Services_Twilio_RestException $e) {
-                echo $e->getMessage(); 
+                echo $e->getMessage();
             }
 
-            print_r($twilioResponse);
+            // Save Twilio Sid in database
+            //$db->saveTwilioResponse($twilioResponse->sid);
 
+            print_r($twilioResponse->sid);
+            //TODO: Find out rate at which twilio accepts api calls and use asynchronous calls if possible
             sleep(1);
         }
+
+        return $twilioResponse;
     }
 }
