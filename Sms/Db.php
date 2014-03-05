@@ -264,11 +264,18 @@ class Database
     public function saveTwilioResponse($data) {
         // parse and save meaningful response from twilio's api
 
+        /*
+         * Results to save:
+         * sid
+         * status
+         *
+         */
+
         $query = "";
 
         $result = $this->_mysqli->query($query);
 
-        
+
     }
 
 
