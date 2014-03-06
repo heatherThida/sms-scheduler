@@ -261,10 +261,15 @@ class Database
 
     }
 
-    public function saveTwilioSID($smsId, $twilioSID, $tableName = 'log') {
+    public function saveTwilioResponse($smsId, $twilioResponse, $tableName = 'log') {
         // parse and save meaningful response from twilio's api
 
-        $query = "UPDATE $tableName SET api_response='$twilioSID' WHERE id='$smsId'";
+        $twilioSID  = $twilioResponse['sid'];
+        $status     = $twilioResponse['status'];
+
+        $query =    "UPDATE $tableName
+                    SET api_response='$twilioSID', status='$status'
+                    WHERE id='$smsId'";
 
         print_r($query);
 
