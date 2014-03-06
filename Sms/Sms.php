@@ -49,7 +49,7 @@ class Sms
 
         echo "Beginning foreach loop..\n";
         foreach($sms as $key => $singleSms) {
-            print_r($singleSms['to_number']);
+            //print_r($singleSms['to_number']);
 
             try {
                 $twilioResponse = $this->client->account->messages->sendMessage(
@@ -62,9 +62,9 @@ class Sms
             }
 
             // Save Twilio Sid in database
-            //$db->saveTwilioResponse($twilioResponse->sid);
+            $db->saveTwilioSID($singleSms['id'], $twilioResponse->sid);
 
-            print_r($twilioResponse->sid);
+            //print_r($twilioResponse->sid);
             //TODO: Find out rate at which twilio accepts api calls and use asynchronous calls if possible
             sleep(1);
         }
