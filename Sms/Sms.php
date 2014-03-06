@@ -61,10 +61,13 @@ class Sms
                 echo $e->getMessage();
             }
 
-            // Save Twilio Sid in database
-            $db->saveTwilioSID($singleSms['id'], $twilioResponse->sid);
+            // Get response from Twilio in json format and convert to array
+            $twilioResponse = json_decode($twilioResponse->__toString());
 
-            //print_r($twilioResponse->sid);
+            // Save Twilio Sid in database
+            $db->saveTwilioSID($singleSms['id'], $twilioResponse);
+
+            print_r($twilioResponse);
             //TODO: Find out rate at which twilio accepts api calls and use asynchronous calls if possible
             sleep(1);
         }
