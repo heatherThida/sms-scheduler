@@ -283,14 +283,28 @@ class Database
     public function getSmsStatus() {
         // ping twilio with sms_id for status
 
+        $tableName = 'log';
+
         $query = "SELECT `id`, `api_response`
-                 FROM `log`
+                 FROM $tableName
                  WHERE `status`='queued'
                 ";
 
         $result = $this->_mysqli->query($query);
 
-        print_r($result);
+        if($result) {
+            // fetch object array
+            while ($row = $result->fetch_array(MYSQL_ASSOC)) {
+                //print_r($row);
+                $smsToVerify[] = $row;
+            }
+            $result->close();
+        }
+
+        $this->_mysqli->close();
+
+        print_r($smsToVerify);
+
     }
 
 
