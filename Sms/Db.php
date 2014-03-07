@@ -278,8 +278,19 @@ class Database
         echo "Mysql query inserting twilio response\n";
         print_r($result);
         echo "\n";
+    }
 
+    public function getSmsStatus() {
+        // ping twilio with sms_id for status
 
+        $query = "SELECT `id`, `api_response`
+                 FROM `log`
+                 WHERE `status`='queued'
+                ";
+
+        $result = $this->_mysqli->query($query);
+
+        print_r($result);
     }
 
 
