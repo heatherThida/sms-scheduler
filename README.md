@@ -9,4 +9,4 @@ To run this locally, you'll need to clone the site, set up a database and add th
 Also, you'll need to set up a cron job to run every five minutes so that it picks up the sms to send.
 
 ## Current Status
-It's currently in pre-alpha stage and would need a lot more to get to alpha or beta. Pull requests are certainly welcome. 
+It's currently in pre-alpha stage and would need a lot more to get to alpha or beta. Pull requests are certainly welcome.
