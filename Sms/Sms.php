@@ -55,7 +55,10 @@ class Sms
                 $twilioResponse = $this->client->account->messages->sendMessage(
                     $this->fromNumber,      // From a valid Twilio Number
                     $singleSms['to_number'],    // Text this number
-                    $singleSms['message']
+                    $singleSms['message'],
+                    array(
+                        'StatusCallback' => TWILIO_STATUS_CALLBACK_URL      // Defined in config file
+                    )
                 );
             } catch (Services_Twilio_RestException $e) {
                 echo $e->getMessage();
@@ -69,10 +72,8 @@ class Sms
             $db->saveTwilioResponse($singleSms['id'], $twilioResponse);
 
             //print_r($twilioResponse);
-            //TODO: Find out rate at which twilio accepts api calls and use asynchronous calls if possible
-            sleep(1);
         }
 
-        return $twilioResponse;
+        //return $twilioResponse;
     }
 }
