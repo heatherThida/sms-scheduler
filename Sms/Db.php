@@ -73,6 +73,41 @@ class Database
 
     }
 
+    public function createDatabase() {
+        $query = "
+                    CREATE TABLE IF NOT EXISTS `log`
+                    (
+                     id INT NOT NULL AUTO_INCREMENT,
+                     status varchar(25),
+                     from_number VARCHAR(255),
+                     to_number VARCHAR(255),
+                     message TEXT,
+                     ip BIGINT(20),
+                     api_response TEXT,
+                     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                     scheduled_datetime DATETIME,
+                     sms_scheduled_time DATETIME,
+                     scheduled_at TIMESTAMP,
+                     executed_at TIMESTAMP,
+                     finished_at TIMESTAMP,
+                     PRIMARY KEY (id)
+                    ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+                ";
+
+        $result = $this->_mysqli->query($query);
+
+        if ($result) {
+            echo "Table has been successfully created.\n";
+            $result->close();
+        } else {
+            echo "Oops, could not create table.\n";
+            echo $result->connect_error;
+        }
+
+        $this->_mysqli->close();
+    }
+
+
     /*
      * Save data from form into database
      *
@@ -213,39 +248,27 @@ class Database
         $this->_mysqli->close();
     }
 
-    public function getSmsScheduledForNextFiveMinutes($tableName = 'log') {
-
-        /*
-         * Each row has a scheduled time
-         * Get current time + 5 minutes = time
-         * Return all rows with scheduled time < time
-         */
-        $timeInterval = time() + 5;
-
-        $dateTime = new DateTime();
-        $dateTime->format('Y-m-d H:i:s');
-        $nextFiveMinutes = $dateTime->add(new DateInterval('PT5M'))->getTimestamp();
-
-        echo $nextFiveMinutes;
-
-        //print_r($nextFiveMinutes->getTimestamp());
-
+    /*
+     * Return all messages that have not been sent and are scheduled for the next five minutes
+     *
+     * @return array
+     */
+    public function getSmsScheduledForNextFiveMinutes() {
 
         $smsToSend = array();
 
-        //$query = "SELECT * FROM $tableName WHERE `scheduled_datetime` < $nextFiveMinutes->getTimestamp() ";
-        //$query = "SELECT * FROM $tableName WHERE `scheduled_datetime`> $nextFiveMinutes";
-        //$query = "SELECT `scheduled_datetime` FROM $tableName";
-        $query = "SELECT * FROM $tableName WHERE TIMESTAMPDIFF(MINUTE, NOW(), `scheduled_datetime`) < 5";
-
-        //print_r($query);
+        //TODO: Double check the reference to 'NOW' and what time exactly is being used.
+        $query =    "
+                    SELECT `id`, `to_number`, `message`
+                    FROM `log`
+                    WHERE TIMESTAMPDIFF(MINUTE, NOW(), `scheduled_datetime`) < 5 && `status` = 'pending';
+                    ";
 
         $result = $this->_mysqli->query($query);
 
         //print_r($result);
 
         if($result) {
-            // fetch object array
             while ($row = $result->fetch_array(MYSQL_ASSOC)) {
                 //print_r($row);
                 $smsToSend[] = $row;
