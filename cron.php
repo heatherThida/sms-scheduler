@@ -1,5 +1,7 @@
 <?php
 
+chdir(dirname(__FILE__));
+
 include_once('./includes/common.php');
 include_once('./includes/config.php');
 include_once('./Sms/Db.php');
