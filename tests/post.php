@@ -5,10 +5,11 @@ include_once('../includes/common.php');
 // Set POST variables
 $url = "http://kojo.com/sms.php";
 $fields = array(
-    'to' => "614-286-7468",
-    'from' => "(646) 350-0611",
-    "message" => "SMS from command line",
-    "date" => "now"
+    'to'        => "614-286-7468",
+    'from'      => "(646) 350-0611",
+    "message"   => "SMS from command line",
+    "date"      => "2014-03-08 20:55",
+    "ip"        => "127.0.0.1",
 );
 
 //// url-ify the data for the POST
