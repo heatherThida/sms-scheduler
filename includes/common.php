@@ -5,6 +5,9 @@ error_reporting(E_ALL);
 
 /** Display errors **/
 ini_set('display_errors', 1);
+ini_set('error_log', 'log/errors.log.txt');
+
+
 
 function debug($object){
     echo "<pre>";
