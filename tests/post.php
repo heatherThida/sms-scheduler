@@ -1,14 +1,17 @@
 <?php
 
 include_once('../includes/common.php');
+include_once('../includes/config.php');
 
 // Set POST variables
 $url = "http://kojo.com/sms.php";
+$date = date('Y-m-d H:i:s', time());
+
 $fields = array(
-    'to'        => "614-286-7468",
-    'from'      => "(646) 350-0611",
+    'to'        => TEST_NUMBER,
+    'from'      => TWILIO_NUMBER,
     "message"   => "SMS from command line",
-    "date"      => "2014-03-08 20:55",
+    "date"      => $date,
     "ip"        => "127.0.0.1",
 );
 
