@@ -52,14 +52,22 @@ class Sms
             //print_r($singleSms['to_number']);
 
             try {
-                $twilioResponse = $this->client->account->messages->sendMessage(
-                    $this->fromNumber,      // From a valid Twilio Number
-                    $singleSms['to_number'],    // Text this number
-                    $singleSms['message'],
-                    array(
-                        'StatusCallback' => TWILIO_STATUS_CALLBACK_URL      // Defined in config file
-                    )
-                );
+                $twilioResponse = $this->client->account->messages->create(array(
+                                    'To' => $singleSms['to_number'],
+                                    'From' => $this->fromNumber,
+                                    'Body' => $singleSms['message'],
+                                    'StatusCallback' => TWILIO_STATUS_CALLBACK_URL
+                ));
+
+//                $twilioResponse = $this->client->account->messages->sendMessage(
+//                    $this->fromNumber,      // From a valid Twilio Number
+//                    $singleSms['to_number'],    // Text this number
+//                    $singleSms['message'],
+//
+//                    array(
+//                        'StatusCallback' => TWILIO_STATUS_CALLBACK_URL      // Defined in config file
+//                    )
+//                );
             } catch (Services_Twilio_RestException $e) {
                 echo $e->getMessage();
             }
