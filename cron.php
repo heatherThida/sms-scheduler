@@ -18,11 +18,15 @@ include_once('./lib/twilio-php/Services/Twilio.php');
 $db = new Database();
 $sms = new Sms();
 
-//$findSmsToSend = $db->getSmsScheduledForNextFiveMinutes();
+$findSmsToSend = $db->getSmsScheduledForNextFiveMinutes();
 
-//$sentSms = $sms->send($findSmsToSend);
+print_r($findSmsToSend);
 
-$smsStatus = $db->getSmsStatus();
+$sentSms = $sms->send($findSmsToSend);
+
+print_r($sentSms);
+
+//$smsStatus = $db->getSmsStatus();
 
 //debug($sentSms);
 //debug($sentSms);
