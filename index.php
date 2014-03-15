@@ -10,6 +10,7 @@
           getenv('HTTP_FORWARDED')?:
           getenv('REMOTE_ADDR');
 
+    // Ip to prevent abuse of system. Better way would be to validate phone number.
     $ip = ip2long($ip);
 ?>
 
