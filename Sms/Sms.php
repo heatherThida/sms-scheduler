@@ -35,8 +35,6 @@ class Sms
 
         $this->client = new Services_Twilio(TWILIO_SID, TWILIO_TOKEN);
 
-        //return $client;
-
     }
     /*
      * @param array - an array with sms data
@@ -58,28 +56,18 @@ class Sms
                                     'Body' => $singleSms['message'],
                                     'StatusCallback' => TWILIO_STATUS_CALLBACK_URL
                 ));
-
-//                $twilioResponse = $this->client->account->messages->sendMessage(
-//                    $this->fromNumber,      // From a valid Twilio Number
-//                    $singleSms['to_number'],    // Text this number
-//                    $singleSms['message'],
-//
-//                    array(
-//                        'StatusCallback' => TWILIO_STATUS_CALLBACK_URL      // Defined in config file
-//                    )
-//                );
             } catch (Services_Twilio_RestException $e) {
                 echo $e->getMessage();
             }
 
-            // Get response from Twilio in json format and convert to array
-            $twilioResponse = json_decode($twilioResponse->__toString(), true);
-            print_r($twilioResponse);
+            if (!empty($twilioResponse)){
+                // Get response from Twilio in json format and convert to array
+                $twilioResponse = json_decode($twilioResponse->__toString(), true);
+                print_r($twilioResponse);
 
-            // Save Twilio Sid in database
-            $db->saveTwilioResponse($singleSms['id'], $twilioResponse);
-
-            //print_r($twilioResponse);
+                // Save Twilio Sid in database
+                $db->saveTwilioResponse($singleSms['id'], $twilioResponse);
+            }
         }
 
         //return $twilioResponse;
