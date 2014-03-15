@@ -30,3 +30,7 @@ body {
 .form-schedule-sms .form-control:focus {
 	z-index: 2;
 }
+
+.form-schedule-sms .error{
+    color: #c0392b;
+}
