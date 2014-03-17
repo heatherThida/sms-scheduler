@@ -8,11 +8,11 @@ $url = "http://kojo.com/sms.php";
 $date = date('Y-m-d H:i:s', time());
 
 $fields = array(
-    'to'        => TEST_NUMBER,
-    'from'      => TWILIO_NUMBER,
-    "message"   => "SMS from command line",
-    "date"      => $date,
-    "ip"        => "127.0.0.1",
+    'to'      => TEST_NUMBER,
+    'from'    => TWILIO_NUMBER,
+    "message" => "SMS from command line",
+    "date"    => $date,
+    "ip"      => "127.0.0.1",
 );
 
 //// url-ify the data for the POST
@@ -29,7 +29,7 @@ $ch = curl_init();
 
 // Set the url, number of POST vars, POST data
 curl_setopt($ch, CURLOPT_URL, $url);
-curl_setopt($ch,CURLOPT_HEADER,FALSE);
+curl_setopt($ch, CURLOPT_HEADER, false);
 curl_setopt($ch, CURLOPT_POST, count($fields));
 curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
 

@@ -5,10 +5,13 @@ include('../includes/config.php');
 /*
  * Class to schedule SMS
  */
-class SmsScheduler {
+
+class SmsScheduler
+{
 
 
-    public function getSmsScheduledForNextFiveMinutes($tableName = 'log') {
+    public function getSmsScheduledForNextFiveMinutes($tableName = 'log')
+    {
 
         /*
          * Each row has a scheduled time
@@ -39,7 +42,7 @@ class SmsScheduler {
 
         //print_r($result);
 
-        if($result) {
+        if ($result) {
             // fetch object array
             while ($row = $result->fetch_array(MYSQL_ASSOC)) {
                 //print_r($row);
@@ -58,22 +61,26 @@ class SmsScheduler {
 
     private $scheduledTime;
 
-    public function readDatabase() {
+    public function readDatabase()
+    {
 
     }
 
-    public function getScheduledTime() {
+    public function getScheduledTime()
+    {
 
     }
 
     /*
      *
      */
-    public function getScheduledMessages() {
+    public function getScheduledMessages()
+    {
 
     }
 
-    public function getSmsfromDb() {
+    public function getSmsfromDb()
+    {
 
     }
 }

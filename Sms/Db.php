@@ -36,7 +36,7 @@ class Database
     private $dbPass;
     private $dbName;
     private $dbPort;
-    private static $_connection = NULL;
+    private static $_connection = null;
 
     /*
      * @param string $dbHost
@@ -53,7 +53,7 @@ class Database
         $this->dbUser = DBUSER;
         $this->dbPass = DBPASS;
         $this->dbName = DBNAME;
-        if($this->dbPort == NULL) {
+        if ($this->dbPort == null) {
             $port = ini_get('mysqli.default_port');
             $this->dbPort = $port;
         }
@@ -61,8 +61,8 @@ class Database
 
         $this->_mysqli = new mysqli($this->dbHost, $this->dbUser, $this->dbPass, $this->dbName, $this->dbPort);
 
-        if($this->_mysqli->connect_errno) {
-            echo "Failed to connect to MySQL: (" . $this->_mysqli->connect_errno . ") " .$this->_mysqli->connect_error;
+        if ($this->_mysqli->connect_errno) {
+            echo "Failed to connect to MySQL: (" . $this->_mysqli->connect_errno . ") " . $this->_mysqli->connect_error;
             die("There was a problem connecting to database...\n");
 
             $this->_mysqli->set_charset('utf8');
@@ -73,8 +73,10 @@ class Database
 
     }
 
-    public function createDatabase() {
-        $query = "
+    public function createDatabase()
+    {
+        $query
+            = "
                     CREATE TABLE IF NOT EXISTS `log`
                     (
                      id INT NOT NULL AUTO_INCREMENT,
@@ -119,7 +121,7 @@ class Database
 
         $validatedData = $this->validatePostData($data);
 
-        if (($validatedData['success']) == FALSE) {
+        if (($validatedData['success']) == false) {
             //print_r($validatedData['errors']);
             return $validatedData['errors'];
         }
@@ -152,11 +154,11 @@ class Database
      */
     public function validatePostData($data)
     {
-        $errors         = array();      // Array to hold validation errors
-       // $data           = array();      // Array to pass back data
+        $errors = array(); // Array to hold validation errors
+        // $data           = array();      // Array to pass back data
 
 
-        if (empty($data["to"])){
+        if (empty($data["to"])) {
             $errors['to'] = 'Please enter a number to send to';
         }
 
@@ -172,7 +174,7 @@ class Database
             $errors['date'] = 'Date is required.';
         }
 
-        if ( !empty($errors)) {
+        if (!empty($errors)) {
             // Return errors
             $data['success'] = false;
             $data['errors'] = $errors;
@@ -182,14 +184,15 @@ class Database
 
         // create an array to return
         $validatedData = array(
-            'data'      => $data,
-            'errors'    => $errors
+            'data'   => $data,
+            'errors' => $errors
         );
 
         return $data;
     }
 
-    public function getTableColumnNamesAsArray() {
+    public function getTableColumnNamesAsArray()
+    {
 
         $tableColNames = array(
             'status',
@@ -206,16 +209,17 @@ class Database
         return $tableColNames;
     }
 
-    public function prepareDataForDatabase($data) {
+    public function prepareDataForDatabase($data)
+    {
 
         $preparedData = array(
-            'status' => 'pending',
-            'from_number' => $data['from'],
-            'to_number' => $data['to'],
-            'message' => $data['message'],
+            'status'             => 'pending',
+            'from_number'        => $data['from'],
+            'to_number'          => $data['to'],
+            'message'            => $data['message'],
             'sms_scheduled_time' => time(),
             'scheduled_datetime' => $data['date'],
-            'ip' => $data['ip']
+            'ip'                 => $data['ip']
         );
 
         return $preparedData;
@@ -227,7 +231,7 @@ class Database
         $query = "SELECT * FROM $tableName";
         $result = $this->_mysqli->query($query);
 
-        if($result) {
+        if ($result) {
             // fetch object array
             while ($row = $result->fetch_array(MYSQL_ASSOC)) {
                 print_r($row);
@@ -253,12 +257,14 @@ class Database
      *
      * @return array
      */
-    public function getSmsScheduledForNextFiveMinutes() {
+    public function getSmsScheduledForNextFiveMinutes()
+    {
 
         $smsToSend = array();
 
         //TODO: Double check the reference to 'NOW' and what time exactly is being used.
-        $query =    "
+        $query
+            = "
                     SELECT `id`, `to_number`, `message`
                     FROM `log`
                     WHERE TIMESTAMPDIFF(MINUTE, NOW(), `scheduled_datetime`) < 5 && `status` = 'pending';
@@ -268,7 +274,7 @@ class Database
 
         //print_r($result);
 
-        if($result) {
+        if ($result) {
             while ($row = $result->fetch_array(MYSQL_ASSOC)) {
                 //print_r($row);
                 $smsToSend[] = $row;
@@ -284,13 +290,14 @@ class Database
 
     }
 
-    public function saveTwilioResponse($smsId, $twilioResponse, $tableName = 'log') {
+    public function saveTwilioResponse($smsId, $twilioResponse, $tableName = 'log')
+    {
         // parse and save meaningful response from twilio's api
 
-        $twilioSID  = $twilioResponse['sid'];
-        $status     = $twilioResponse['status'];
+        $twilioSID = $twilioResponse['sid'];
+        $status = $twilioResponse['status'];
 
-        $query =    "UPDATE $tableName
+        $query = "UPDATE $tableName
                     SET api_response='$twilioSID', status='$status'
                     WHERE id='$smsId'";
 
@@ -303,7 +310,8 @@ class Database
         echo "\n";
     }
 
-    public function getSmsStatus() {
+    public function getSmsStatus()
+    {
         // ping twilio with sms_id for status
 
         $tableName = 'log';
@@ -315,7 +323,7 @@ class Database
 
         $result = $this->_mysqli->query($query);
 
-        if($result) {
+        if ($result) {
             // fetch object array
             while ($row = $result->fetch_array(MYSQL_ASSOC)) {
                 //print_r($row);

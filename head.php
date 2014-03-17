@@ -4,8 +4,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="author" content="Kojoman">
 
-<!-- Bootstrap CSS --> 
-<link rel="stylesheet" href="public/css/bootstrap.css" >
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="public/css/bootstrap.css">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
 
 <!-- jQuery Simple DateTimePicker CSS -->

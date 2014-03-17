@@ -13,7 +13,8 @@ if ($db->connect_errno) {
 $drop_tables = "DROP TABLE log";
 
 // Should use "CREATE TABLE IF NOT EXISTS log
-$log = "CREATE TABLE IF NOT EXISTS log
+$log
+    = "CREATE TABLE IF NOT EXISTS log
         (
          id INT NOT NULL AUTO_INCREMENT,
          status varchar(25),
@@ -53,7 +54,8 @@ $db->close();
 
 
 // Should use "CREATE TABLE IF NOT EXISTS log
-$log = "CREATE TABLE IF NOT EXISTS log
+$log
+    = "CREATE TABLE IF NOT EXISTS log
         (
          id INT NOT NULL AUTO_INCREMENT,
          status varchar(25),

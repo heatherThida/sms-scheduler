@@ -12,7 +12,7 @@ $smsData = $_POST;
 $db = new Database();
 $savePost = $db->savePostData('log', $smsData);
 
-if(!$savePost) {
+if (!$savePost) {
     // Post Data could not be saved
     // Return meaningful error here
     echo "Sorry, we could not schedule your sms";
@@ -23,13 +23,13 @@ if(!$savePost) {
 
 <!DOCTYPE HTML>
 <html>
-	<head>
-		<title>SMS Scheduler</title>
-		<?php include 'head.php'; ?>
-	</head>
-	<body>
-		<p>Thanks for the submission.. </p>
-		
-		<?php include 'footer.php'; ?>
-	</body>
+<head>
+    <title>SMS Scheduler</title>
+    <?php include 'head.php'; ?>
+</head>
+<body>
+<p>Thanks for the submission.. </p>
+
+<?php include 'footer.php'; ?>
+</body>
 </html>

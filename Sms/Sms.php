@@ -29,38 +29,42 @@ class Sms
      */
     public function __construct()
     {
-        $this->apiKey       = TWILIO_SID;
-        $this->apiSecret    = TWILIO_TOKEN;
-        $this->fromNumber   = TWILIO_NUMBER;
+        $this->apiKey = TWILIO_SID;
+        $this->apiSecret = TWILIO_TOKEN;
+        $this->fromNumber = TWILIO_NUMBER;
 
         $this->client = new Services_Twilio(TWILIO_SID, TWILIO_TOKEN);
 
     }
+
     /*
      * @param array - an array with sms data
      *
      */
-    public function send($sms) {
+    public function send($sms)
+    {
         echo "Inside send function..\n";
         //print_r($sms);
         $db = new Database();
 
         echo "Beginning foreach loop..\n";
-        foreach($sms as $key => $singleSms) {
+        foreach ($sms as $key => $singleSms) {
             //print_r($singleSms['to_number']);
 
             try {
-                $twilioResponse = $this->client->account->messages->create(array(
-                                    'To' => $singleSms['to_number'],
-                                    'From' => $this->fromNumber,
-                                    'Body' => $singleSms['message'],
-                                    'StatusCallback' => TWILIO_STATUS_CALLBACK_URL
-                ));
+                $twilioResponse = $this->client->account->messages->create(
+                    array(
+                        'To'             => $singleSms['to_number'],
+                        'From'           => $this->fromNumber,
+                        'Body'           => $singleSms['message'],
+                        'StatusCallback' => TWILIO_STATUS_CALLBACK_URL
+                    )
+                );
             } catch (Services_Twilio_RestException $e) {
                 echo $e->getMessage();
             }
 
-            if (!empty($twilioResponse)){
+            if (!empty($twilioResponse)) {
                 // Get response from Twilio in json format and convert to array
                 $twilioResponse = json_decode($twilioResponse->__toString(), true);
                 print_r($twilioResponse);

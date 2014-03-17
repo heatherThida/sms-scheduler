@@ -1,7 +1,7 @@
 /**
  *
  */
-$(document).ready(function() {
+$(document).ready(function () {
 
     // jQuery UI Datepicker
 //    $(function() {
@@ -18,13 +18,13 @@ $(document).ready(function() {
 //    });
 
     // Date time picker
-    $(function(){
-       $('*[name=date]').appendDtpicker({
-           'inline'             : false,
-           'minuteInterval'     : 5,
-           'futureOnly'         : true,
-           'closeOnSelected'    : true
-       });
+    $(function () {
+        $('*[name=date]').appendDtpicker({
+            'inline': false,
+            'minuteInterval': 5,
+            'futureOnly': true,
+            'closeOnSelected': true
+        });
     });
 
     //Validation
@@ -42,27 +42,27 @@ $(document).ready(function() {
     });
 
     // process form data
-    $('form').submit(function(event) {
+    $('form').submit(function (event) {
 
         // get the form data
         var formData = {
-            'to'            : $('input[name=to]').val(),
-            'from'          : $('input[name=from]').val(),
-            'message'       : $('textarea[name=message]').val(),
-            'date'          : $('input[name=date]').val(),
-            'ip'            : $('input[name=ip]').val()
+            'to': $('input[name=to]').val(),
+            'from': $('input[name=from]').val(),
+            'message': $('textarea[name=message]').val(),
+            'date': $('input[name=date]').val(),
+            'ip': $('input[name=ip]').val()
         };
 
         // process the form
         $.ajax({
-            type        : 'POST',
-            url         : 'sms.php',
-            'data'      : formData,
-            dataType    : 'json'
+            type: 'POST',
+            url: 'sms.php',
+            'data': formData,
+            dataType: 'json'
         })
 
-        // Use the done promise callback
-            .done(function(data) {
+            // Use the done promise callback
+            .done(function (data) {
                 // log data to console - just for test purposes
                 console.log("Dumping data");
                 console.log(formData);
