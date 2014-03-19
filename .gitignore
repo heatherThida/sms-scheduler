@@ -1,3 +1,7 @@
 includes/config.php
 log/
 *.idea
+
+# Config and Htaccess Files
+/src/.htaccess
+/app/config/config.php
