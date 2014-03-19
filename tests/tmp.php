@@ -1,10 +1,5 @@
 <?php
 
-include('../Sms/Db.php');
+include('../app/config/config.php');
 
-$x = new Database(DBHOST, DBUSER, DBPASS, DBNAME);
-
-//print_r($x);
-
-$y = $x->getSmsScheduledForNextFiveMinutes('log');
-print_r($y);
+debug($_GET);
