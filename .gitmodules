@@ -1,3 +1,6 @@
 [submodule "app/libs/twilio-php"]
 	path = app/libs/twilio-php
 	url = git@github.com:twilio/twilio-php.git
+[submodule "app/libs/jQuery-Timepicker-Addon"]
+	path = app/libs/jQuery-Timepicker-Addon
+	url = git@github.com:trentrichardson/jQuery-Timepicker-Addon.git
