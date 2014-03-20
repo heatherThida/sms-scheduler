@@ -1,0 +1,21 @@
+{
+    "name": "kojoman/sms-scheduler",
+    "type": "project",
+    "description": "A simple system to schedule sms messages",
+    "keywords": ["sms", "twilio"],
+    "homepage": "https://github.com/kojoman/sms-scheduler",
+    "authors": [
+        {
+            "name": "Kojoman",
+            "homepage": "http://kojoman.com"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/kojoman/sms-scheduler/issues",
+        "source": "https://github.com/kojoman/sms-scheduler"
+    },
+    "require": {
+        "php": ">=5.3.2",
+        "twilio/sdk": "dev-master"
+    }
+}
