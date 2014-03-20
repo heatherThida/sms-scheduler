@@ -11,9 +11,14 @@
 // Load application config file
 require 'app/config/config.php';
 
-// Load application class
-require 'app/libs/application.php';
-require 'app/libs/controller.php';
+
+// Load auto-loader
+require 'app/config/autoload.php';
+
+// Composer auto-loader
+if (file_exists('vendor/autoload.php')) {
+    require 'vendor/autoload.php';
+}
 
 // Start the application
 $app = new Application();
