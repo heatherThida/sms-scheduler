@@ -40,12 +40,20 @@ class Application
         // Check if controller exists
         if (file_exists('./app/controllers/' . $this->url_controller . '.php')) {
 
+            echo "{$this->url_controller}.php exists.";
+            debug(get_class_vars($this->url_controller));
+
             // Load this file and create the controller
             require './app/controllers/' . $this->url_controller() . '.php';
             $this->url_controller = new $this->url_controller();
+            debug($this->url_controller);
+            var_dump($this->url_controller);
 
             // Check to see if method exists
             if (method_exists($this->url_controller, $this->url_action)) {
+
+                echo "$this->url_action method exists";
+
 
                 // Call the method and pass the arguments to it
                 if (isset($this->url_parameter_3)) {
