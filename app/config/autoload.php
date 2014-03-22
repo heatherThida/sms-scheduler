@@ -6,7 +6,7 @@ function autoload($class) {
     // Make sure first letter is capitalized
     $class = ucfirst(strtolower($class));
 
-    // If file does not exist in LIBS_PATH folder = 'app/libs/
+    // Check to see if file exists in 'app/libs' folder
     if (file_exists(LIBS_PATH . $class . '.php')) {
         require LIBS_PATH . $class . '.php';
     } else {
