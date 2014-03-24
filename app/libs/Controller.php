@@ -11,7 +11,7 @@ class Controller
      */
     function __construct()
     {
-        Session::init();
+        //Session::init();
 
         // Login user with cookie if 'remember-me' cookie isset
         if (!isset($_SESSION['user_logged_in']) && isset($_COOKIE['rememberme'])) {
