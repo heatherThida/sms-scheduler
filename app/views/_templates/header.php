@@ -9,7 +9,7 @@
     <meta name="author" content="Kojoman">
 
     <!-- CSS -->
-    <link href="<?php echo URL; ?>public/css/bootstrap.css" rel="stylesheet">
+    <link  rel="stylesheet" href="<?php echo URL; ?>public/css/bootstrap.css">
     <!-- jQuery Simple DateTimePicker CSS -->
     <link href="<?php echo URL; ?>public/css/jquery.simple-dtpicker.css" rel="stylesheet">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
@@ -19,3 +19,8 @@
     <!-- Javascript -->
 </head>
 
+<body>
+
+<div class="debug-helper-box">
+    DEBUG HELPER: you are in the view: <?php echo $filename; ?>
+</div>
