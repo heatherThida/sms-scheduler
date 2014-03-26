@@ -18,10 +18,10 @@ class Index extends Controller
      */
     function index()
     {
-        echo "Inside index method of Index Class.";
-        echo "<h1>This is the homepage</h1>";
+        debug("Inside index method of Index Class.");
+        debug("<h1>This is the homepage</h1>");
 
-        $x = $this->view->render('index/index');
+        $this->view->render('index/index');
     }
 
 } 
