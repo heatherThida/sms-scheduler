@@ -78,7 +78,7 @@ class Application
             } else {
                 // Invalid URL, simply show index/index
                 // TODO: update this to show a 404 page instead
-                echo "Invalid URL or no controller/methods provided. Re-routing to homepage (index/index.php)";
+                debug("Invalid URL or no controller/methods provided. Re-routing to homepage (index/index.php)");
                 require CONTROLLER_PATH . 'Index.php';
                 $controller = new Index();
                 $controller->index();
@@ -108,11 +108,11 @@ class Application
             $this->url_parameter_3  = (isset($url[2]) ? $url[4] : null);
 
             // Debugging
-//             echo 'Controller: ' . $this->url_controller . '<br />';
-//             echo 'Action: ' . $this->url_action . '<br />';
-//             echo 'Parameter 1: ' . $this->url_parameter_1 . '<br />';
-//             echo 'Parameter 2: ' . $this->url_parameter_2 . '<br />';
-//             echo 'Parameter 3: ' . $this->url_parameter_3 . '<br />';
+            echo 'Controller: ' . $this->url_controller . '<br />';
+            echo 'Action: ' . $this->url_action . '<br />';
+            echo 'Parameter 1: ' . $this->url_parameter_1 . '<br />';
+            echo 'Parameter 2: ' . $this->url_parameter_2 . '<br />';
+            echo 'Parameter 3: ' . $this->url_parameter_3 . '<br />';
         }
     }
 }
