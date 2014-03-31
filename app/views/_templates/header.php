@@ -9,7 +9,7 @@
     <meta name="author" content="Kojoman">
 
     <!-- CSS -->
-    <link  rel="stylesheet" href="<?php echo URL; ?>public/css/bootstrap.css">
+    <link  rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
     <!-- jQuery Simple DateTimePicker CSS -->
     <link href="<?php echo URL; ?>public/css/jquery.simple-dtpicker.css" rel="stylesheet">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
