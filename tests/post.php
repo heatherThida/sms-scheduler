@@ -7,6 +7,7 @@ include_once('../includes/config.php');
 $url = "http://kojo.com/sms.php";
 $date = date('Y-m-d H:i:s', time());
 
+// Fields to set and pass via curl call. 
 $fields = array(
     'to'      => TEST_NUMBER,
     'from'    => TWILIO_NUMBER,
@@ -38,3 +39,17 @@ $result = curl_exec($ch);
 
 // Close connection
 curl_close($ch);
+
+// Or alternatively use twilio object. 
+
+require "../app/libs/twilio-php/Services/Twilio.php";
+
+$client = new Services_Twilio(ACCOUNT_SID, AUTH_TOKEN); 
+
+$message = $client->account->messages->create(array(
+	"From" 	=> TWILIO_NUMBER,
+	"TO" 	=> TEST_NUMBER, 
+	"Body" 	=> "Test message!",
+));
+
+echo "Sent message {$message->sid}";
